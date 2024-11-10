@@ -40,5 +40,31 @@ namespace UnitTest1
 		{
 			TestAdditionWithParameters(10, -5, 1210);
 		}
+
+		TEST_METHOD(CheckValidation_ShouldThrowError)
+		{
+			try
+			{
+				checkValidation(0);
+				Assert::Fail();
+			}
+			catch (...)
+			{
+				Assert::IsTrue(true);
+			}
+		}
+
+		TEST_METHOD(CheckValidation_ShouldNotThrowError)
+		{
+			try
+			{
+				checkValidation(123);
+				Assert::IsTrue(true);
+			}
+			catch (...)
+			{
+				Assert::Fail();
+			}
+		}
 	};
 }

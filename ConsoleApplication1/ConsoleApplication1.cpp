@@ -29,32 +29,58 @@ double calculateAddition(int n, int x)
 	return y;
 }
 
+void checkValidation(int n)
+{
+	if (cin.fail()) {
+		throw "Incorrect input";
+	}
+
+	if (n < 4)
+	{
+		throw "Incorrect input value: n = " + n;
+	}
+}
+
 int main() {
 	setlocale(LC_ALL, "RUS");
 	int x, b, n, h;
 	// Ввод числа
-	cout << "Enter x number:" << endl;
-	cin >> x;
-	cout << "Enter b number:" << endl;
-	cin >> b;
-	cout << "Enter h number:" << endl;
-	cin >> h;
-	cout << "Enter n number:" << endl;
-	cin >> n;
+	try
+	{
+		cout << "Enter x number:" << endl;
+		cin >> x;
+		cout << "Enter b number:" << endl;
+		cin >> b;
+		cout << "Enter h number:" << endl;
+		cin >> h;
+		cout << "Enter n number:" << endl;
+		cin >> n;
 
-	while (x <= b) {
-		double result;
-		if (x > 0) {
-			result = calculateMultiplication(n, x);
+		checkValidation(n);
+
+		while (x <= b) {
+			double result;
+			if (x > 0) {
+				result = calculateMultiplication(n, x);
+			}
+			else {
+				result = calculateAddition(n, x);
+			}
+
+			print(x, result);
+
+			x += h;
 		}
-		else {
-			result = calculateAddition(n, x);
-		}
-
-		print(x, result);
-
-		x += h;
+		return 0;
 	}
-
-	return 0;
+	catch (const char* ex)
+	{
+		cout << ex << endl;
+		return -1;
+	}
+	catch (...)
+	{
+		cout << "Unknown error" << endl;
+		return -2;
+	}
 }
